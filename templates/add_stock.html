@@ -1,0 +1,21 @@
+{% extends 'master.html' %}
+
+{% block title %}
+    <title>Add Stock</title>
+{% endblock %}
+
+
+
+{% block content %}
+    <div class="container mt-4">
+        <h2>Add Stock for {{ product.name }}</h2>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="quantity">Quantity to Add</label>
+                <input type="number" name="quantity" id="quantity" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-success">Add Stock</button>
+        </form>
+    </div>
+{% endblock %}

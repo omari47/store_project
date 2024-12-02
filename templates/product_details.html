@@ -1,0 +1,51 @@
+{% extends 'master.html' %}
+
+
+{% block title %}
+    <title>Product Details</title>
+{% endblock %}
+
+
+
+
+
+{% block content %}
+    <div class="container mt-4">
+        <h2>Product Details</h2>
+        <table class="table">
+            <tr>
+                <th>Name</th>
+                <td>{{ product.name }}</td>
+            </tr>
+            <tr>
+                <th>Category</th>
+                <td>{{ product.category }}</td>
+            </tr>
+            <tr>
+                <th>Stock Quantity</th>
+                <td>{{ product.quantity }}</td>
+            </tr>
+            <tr>
+                <th>Manufacture Date</th>
+                <td>{{ product.manufacture_date|date:"d-m-Y" }}</td>
+            </tr>
+            <tr>
+                <th>Expiry Date</th>
+                <td>{{ product.expiry_date|date:"d-m-Y" }}</td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td>{{ product.status }}</td>
+            </tr>
+            <tr>
+                <th>Price</th>
+                <td>{{ product.price }}</td>
+            </tr>
+            <tr>
+                <th>SKU</th>
+                <td>{{ product.sku }}</td>
+            </tr>
+        </table>
+        <a href="{% url 'edit_product' product.id %}" class="btn btn-warning">Edit Product</a>
+    </div>
+{% endblock %}
