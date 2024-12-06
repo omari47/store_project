@@ -20,7 +20,7 @@ from django.urls import path
 from store_app import views
 
 urlpatterns = [
-    path('', views.dashboard, name='dashboard'),
+    path('dashboard', views.dashboard, name='dashboard'),
     path('products/', views.product_list, name='product_list'),
     path('product/<int:product_id>/', views.view_details, name='view_details'),  # View product details
     path('product/edit/<int:product_id>/', views.edit_product, name='edit_product'),  # Edit product
@@ -36,7 +36,7 @@ urlpatterns = [
     path('api/low-stock/', views.low_stock, name='low-stock'),
 
     path('logout/', views.logout_view, name='logout'),
-    path('login/', views.login_view, name='login'),
+    path('', views.login_view, name='login'),
     path('register/', views.register, name='register'),
     path('test', views.test, name='test'),
 

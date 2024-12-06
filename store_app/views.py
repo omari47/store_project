@@ -24,6 +24,7 @@ from django.shortcuts import render, redirect
 from .models import Product, Sale, InventoryLog
 from .forms import SaleForm
 
+
 # Create your views here.
 @login_required
 def dashboard(request):
@@ -32,14 +33,38 @@ def dashboard(request):
     out_of_stock = Product.objects.filter(quantity=0).count()
     low_stock = Product.objects.filter(quantity__lte=10).count()  # Customize threshold
 
+    # Fetch the top 5 most recently added products, ordered by the 'created_at' field
+    recent_products = Product.objects.all().order_by('-created_at')[:5]
+
+    # If you want pagination, you could modify this to use Paginator:
+    from django.core.paginator import Paginator
+    paginator = Paginator(recent_products, 5)  # Show 5 products per page
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
     return render(request, 'dashboard.html', {
         'total_products': total_products,
         'out_of_stock': out_of_stock,
         'low_stock': low_stock,
-        'products': Product.objects.all()[:10]  # Show top 10 products (example)
+        'recent_products': page_obj,  # Pass the paginated products to the template
     })
 
-    # return render(request, 'dashboard.html')
+
+
+# def dashboard(request):
+#     # Example analytics data for the dashboard
+#     total_products = Product.objects.count()
+#     out_of_stock = Product.objects.filter(quantity=0).count()
+#     low_stock = Product.objects.filter(quantity__lte=10).count()  # Customize threshold
+#
+#     return render(request, 'dashboard.html', {
+#         'total_products': total_products,
+#         'out_of_stock': out_of_stock,
+#         'low_stock': low_stock,
+#         'products': Product.objects.all()[:10]  # Show top 10 products (example)
+#     })
+
+# return render(request, 'dashboard.html')
 
 
 @login_required
@@ -110,9 +135,6 @@ def log_sale(request):
     return render(request, 'log_sale.html', {'products': products, 'form': form})
 
 
-
-
-
 @login_required
 def stock_management(request):
     search_query = request.GET.get('search', '')  # Capture the search query
@@ -129,6 +151,7 @@ def stock_management(request):
         'page_obj': page_obj,
         'search_query': search_query,
     })
+
 
 @login_required
 def product_details(request, product_id):
@@ -155,7 +178,6 @@ def view_details(request, product_id):
 
 
 @login_required
-
 def edit_product(request, product_id):
     product = get_object_or_404(Product, id=product_id)
 
@@ -196,8 +218,6 @@ def delete_product(request, product_id):
         return redirect('product_list')  # Redirect to product list after deletion
 
     return render(request, 'confirm_delete.html', {'product': product})
-
-
 
 
 @login_required
@@ -249,6 +269,7 @@ def payment_summary(request):
             }],
         }
     })
+
 
 @login_required
 # Sales Performance
@@ -364,8 +385,6 @@ def logout_view(request):
     return redirect('login')
 
 
-
-
 def register(request):
     if request.method == 'POST':
         form = UserRegistrationForm(request.POST)
@@ -382,7 +401,6 @@ def register(request):
     else:
         form = UserRegistrationForm()
     return render(request, 'register.html', {'form': form})
-
 
 
 from .forms import LoginForm  # Ensure LoginForm is imported
