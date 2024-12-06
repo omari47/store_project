@@ -22,15 +22,27 @@ from store_app import views
 urlpatterns = [
     path('', views.dashboard, name='dashboard'),
     path('products/', views.product_list, name='product_list'),
-    # View product details
-    path('product/<int:product_id>/', views.view_details, name='view_details'),
-
+    path('product/<int:product_id>/', views.view_details, name='view_details'),  # View product details
     path('product/edit/<int:product_id>/', views.edit_product, name='edit_product'),  # Edit product
     path('product/add_stock/<int:product_id>/', views.add_stock, name='add_stock'),  # Add stock
     path('product/delete/<int:product_id>/', views.delete_product, name='delete_product'),  # Delete product
     path('manage/', views.stock_management, name='stock_management'),
     path('sales/log/', views.log_sale, name='log_sale'),
-    path('analytics', views.analytics, name='analytics'),
-    path('product/details', views.product_details, name='product_details'),
+    path('analytics/', views.analytics, name='analytics'),
+    path('product/details/', views.product_details, name='product_details'),  # Updated with product_id
+    path('api/line-chart/', views.line_chart, name='line-chart'),
+    path('api/bar-chart/', views.bar_chart, name='bar-chart'),
+    path('api/pie-chart/', views.pie_chart, name='pie-chart'),
+    path('api/low-stock/', views.low_stock, name='low-stock'),
+
+    path('logout/', views.logout_view, name='logout'),
+    path('login/', views.login_view, name='login'),
+    path('register/', views.register, name='register'),
+    path('test', views.test, name='test'),
+
+    path('api/payment-summary/', views.payment_summary, name='payment-summary'),  # Payment summary
+
+    path('api/sales-performance/', views.sales_performance, name='sales-performance'),
+    path('api/inventory-logs/', views.inventory_logs, name='inventory_logs'),
     path('admin/', admin.site.urls),
 ]

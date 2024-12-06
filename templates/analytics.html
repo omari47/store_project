@@ -2,7 +2,7 @@
 
 
 {% block title %}
-	<title>Analytics</title>
+    <title>Analytics</title>
 {% endblock %}
 
 
@@ -10,8 +10,236 @@
 
 
 {% block content %}
-    <div class="container mt-4 align-center ">
-	analytics here
-    </div>
+    <section class="section">
+        <div class="row">
+
+
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title"> Daily Sales Line Chart</h5>
+
+                        <!-- Line Chart -->
+                        <div id="lineChart"></div>
+
+                        <script>
+                            document.addEventListener("DOMContentLoaded", () => {
+                                // Fetch data from the API endpoint
+                                fetch('/api/line-chart/') // Ensure this endpoint matches your urls.py
+                                    .then(response => response.json())
+                                    .then(data => {
+                                        new ApexCharts(document.querySelector("#lineChart"), {
+                                            series: [{
+                                                name: data.title, // Chart series name from API
+                                                data: data.data.datasets[0].data // Data array from API
+                                            }],
+                                            chart: {
+                                                type: 'line',
+                                                height: 350
+                                            },
+                                            stroke: {
+                                                curve: 'smooth',
+                                                width: 3
+                                            },
+                                            xaxis: {
+                                                categories: data.data.labels, // Labels (dates) from API
+                                                title: {
+                                                    text: "Dates"
+                                                }
+                                            },
+                                            yaxis: {
+                                                title: {
+                                                    text: "Revenue"
+                                                }
+                                            },
+                                            tooltip: {
+                                                x: {
+                                                    format: "dd-MM-yyyy" // Date format
+                                                }
+                                            },
+                                            title: {
+                                                text: data.title,
+                                                align: 'center'
+                                            }
+                                        }).render();
+                                    })
+                                    .catch(error => console.error("Error fetching line chart data:", error));
+                            });
+                        </script>
+                        <!-- End Line Chart -->
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Low Stock Area Chart</h5>
+
+                        <!-- Area Chart -->
+                        <div id="lowStockChart"></div>
+
+                        <script>
+                            document.addEventListener("DOMContentLoaded", () => {
+                                // Fetch data from the API endpoint
+                                fetch('/api/low-stock/') // Ensure this endpoint matches your urls.py
+                                    .then(response => response.json())
+                                    .then(data => {
+                                        new ApexCharts(document.querySelector("#lowStockChart"), {
+                                            series: [{
+                                                name: data.title, // Chart series name from API
+                                                data: data.data.datasets[0].data // Data array from API
+                                            }],
+                                            chart: {
+                                                type: 'area',
+                                                height: 350
+                                            },
+                                            stroke: {
+                                                curve: 'smooth',
+                                                width: 3
+                                            },
+                                            xaxis: {
+                                                categories: data.data.labels, // Product names from API
+                                                title: {
+                                                    text: "Products"
+                                                }
+                                            },
+                                            yaxis: {
+                                                title: {
+                                                    text: "Stock Quantity"
+                                                }
+                                            },
+                                            fill: {
+                                                type: 'gradient',
+                                                gradient: {
+                                                    shadeIntensity: 1,
+                                                    opacityFrom: 0.7,
+                                                    opacityTo: 0.3
+                                                }
+                                            },
+                                            title: {
+                                                text: data.title,
+                                                align: 'center'
+                                            }
+                                        }).render();
+                                    })
+                                    .catch(error => console.error("Error fetching low stock area chart data:", error));
+                            });
+                        </script>
+                        <!-- End Area Chart -->
+
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-body">
+                        <!-- Dynamically set the title for the bar chart -->
+                        <h5 class="card-title" id="barChartTitle">Sales by Product</h5>
+                        <!-- Title will be updated dynamically -->
+
+                        <!-- Bar Chart -->
+                        <div id="barChart"></div>
+
+                        <script>
+                            document.addEventListener("DOMContentLoaded", () => {
+                                // Fetch data from the API endpoint
+                                fetch('/api/bar-chart/') // Ensure this endpoint matches your urls.py
+                                    .then(response => response.json())
+                                    .then(data => {
+                                        // Set the title dynamically from the API response
+                                        document.getElementById('barChartTitle').textContent = data.title;
+
+                                        // Create and render the bar chart
+                                        new ApexCharts(document.querySelector("#barChart"), {
+                                            series: [{
+                                                name: data.title, // Chart series name from API
+                                                data: data.data.datasets[0].data // Data array from API
+                                            }],
+                                            chart: {
+                                                type: 'bar',
+                                                height: 350
+                                            },
+                                            plotOptions: {
+                                                bar: {
+                                                    borderRadius: 4,
+                                                    horizontal: true, // Horizontal bars
+                                                }
+                                            },
+                                            dataLabels: {
+                                                enabled: false // Disable data labels
+                                            },
+                                            xaxis: {
+                                                categories: data.data.labels // Categories from API
+                                            }
+                                        }).render();
+                                    })
+                                    .catch(error => console.error("Error fetching bar chart data:", error));
+                            });
+                        </script>
+                        <!-- End Bar Chart -->
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title" id="pieChartTitle">Payment Method Distribution</h5>
+                        <!-- Title will be updated dynamically -->
+
+                        <!-- Pie Chart -->
+                        <div id="pieChart"></div>
+
+                        <script>
+                            document.addEventListener("DOMContentLoaded", () => {
+                                // Fetch data from the API endpoint
+                                fetch('/api/pie-chart/') // Ensure this endpoint matches the one in your urls.py
+                                    .then(response => response.json())
+                                    .then(data => {
+                                        // Set the title dynamically from the API response
+                                        document.getElementById('pieChartTitle').textContent = data.title;
+
+                                        // Create and render the pie chart
+                                        new ApexCharts(document.querySelector("#pieChart"), {
+                                            series: data.data.datasets[0].data, // Extract the dataset
+                                            chart: {
+                                                height: 350,
+                                                type: 'pie',
+                                                toolbar: {
+                                                    show: true
+                                                }
+                                            },
+                                            labels: data.data.labels, // Extract labels for the chart
+                                            colors: data.data.datasets[0].backgroundColor, // Set dynamic colors
+                                            responsive: [{
+                                                breakpoint: 480,
+                                                options: {
+                                                    chart: {
+                                                        width: 300
+                                                    },
+                                                    legend: {
+                                                        position: 'bottom'
+                                                    }
+                                                }
+                                            }]
+                                        }).render();
+                                    })
+                                    .catch(error => console.error("Error fetching pie chart data:", error));
+                            });
+                        </script>
+                        <!-- End Pie Chart -->
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </section>
 
 {% endblock %}
+

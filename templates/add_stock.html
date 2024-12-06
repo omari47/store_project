@@ -1,21 +1,142 @@
+{#{% extends 'master.html' %}#}
+{#{% load crispy_forms_filters %}#}
+{##}
+{#{% block title %}#}
+{#    <title>Update Stock</title>#}
+{#{% endblock %}#}
+{##}
+{##}
+{##}
+{#{% block content %}#}
+{#    <div class="container mt-4 col-sm-4">#}
+{#        <h2>Update Stock for {{ product.name }}</h2>#}
+{#        <form method="POST">#}
+{#            {% csrf_token %}#}
+{#             {{ form|crispy }}#}
+{#            #}
+{#            <div class="form-group">#}
+{#                <label for="quantity">Quantity to Add</label>#}
+{#                <input type="number" name="quantity" id="quantity" class="form-control" required>#}
+{#            </div>#}
+{#            <button type="submit" class="btn btn-success">Update Stock</button>#}
+{#        </form>#}
+{#    </div>#}
+{#{% endblock %}#}
+
 {% extends 'master.html' %}
+{% load crispy_forms_filters %}
 
 {% block title %}
-    <title>Add Stock</title>
+    <title>Update Stock</title>
 {% endblock %}
 
+{% block extra_css %}
+    <style>
+        /* Styling for the update stock card */
+        .stock-update-card {
+            border: 1px solid #e3e6f0;
+            border-radius: 15px;
+            overflow: hidden;
+            background: linear-gradient(135deg, #ffffff, #f8f9fc);
+            padding: 30px;
+            height: auto;
+            min-height: 350px; /* Ensures vertical stretching */
+        }
 
+        .stock-update-card .card-header {
+            background: #4e73df;
+            color: #fff;
+            padding: 20px;
+            border-bottom: 0;
+        }
+
+        .stock-update-card .card-header h4 {
+            margin: 0;
+            font-size: 1.75rem;
+            font-weight: bold;
+        }
+
+        .stock-update-card .card-body {
+            padding: 30px 20px;
+        }
+
+        .stock-update-card .form-label {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #4e73df;
+        }
+
+        .stock-update-card .form-control {
+            border-radius: 10px;
+            padding: 10px 15px;
+            font-size: 1rem;
+        }
+
+        .stock-update-card .btn-primary {
+            background-color: #4e73df;
+            border-color: #4e73df;
+            font-size: 1.1rem;
+            font-weight: bold;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .stock-update-card .btn-primary:hover {
+            background-color: #2e59d9;
+            border-color: #2e59d9;
+        }
+
+        .stock-update-card .card-footer {
+            background: #f8f9fc;
+            color: #858796;
+            padding: 10px;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive width and height adjustments */
+        @media (min-width: 768px) {
+            .stock-update-card {
+                width: 100%;
+                min-height: 450px; /* Increased vertical space for larger screens */
+            }
+        }
+
+        @media (max-width: 576px) {
+            .stock-update-card {
+                padding: 20px;
+            }
+        }
+
+    </style>
+{% endblock %}
 
 {% block content %}
-    <div class="container mt-4">
-        <h2>Add Stock for {{ product.name }}</h2>
-        <form method="POST">
-            {% csrf_token %}
-            <div class="form-group">
-                <label for="quantity">Quantity to Add</label>
-                <input type="number" name="quantity" id="quantity" class="form-control" required>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-6 col-md-8 col-sm-12">
+                <div class="card stock-update-card shadow-lg">
+                    <div class="card-header text-center">
+                        <h4>Update Stock for {{ product.name }}</h4>
+                    </div>
+                    <div class="card-body">
+                        <form method="POST">
+                            {% csrf_token %}
+                            {{ form|crispy }}
+
+                            <div class="form-group mb-4">
+                                <label for="quantity" class="form-label">Quantity to Add</label>
+                                <input type="number" name="quantity" id="quantity" class="form-control"
+                                       placeholder="Enter quantity" required>
+                            </div>
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primary btn-lg">Update Stock</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="card-footer text-center">
+                        <small>Ensure the quantity entered is correct before submission.</small>
+                    </div>
+                </div>
             </div>
-            <button type="submit" class="btn btn-success">Add Stock</button>
-        </form>
+        </div>
     </div>
 {% endblock %}

@@ -10,8 +10,81 @@
 
 
 {% block content %}
-    <div class="container mt-4 align-center ">
-	stock management
+   <div class="container mt-4 col-sm-8">
+    <h2>Stock Management</h2>
+
+    <!-- Search Form -->
+    <form method="get" class="mb-4">
+        <input type="text" name="search" value="{{ search_query }}" class="form-control" placeholder="Search by product name or SKU">
+        <button type="submit" class="btn btn-primary mt-2">Search</button>
+    </form>
+
+    <!-- Product Table -->
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Stock</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for product in page_obj %}
+            <tr>
+                <td>{{ product.name }}</td>
+                <td>{{ product.quantity }}</td>
+                <td>
+                    <a href="{% url 'edit_product' product.id %}" class="btn btn-sm btn-warning">Edit</a>
+                    <a href="{% url 'add_stock' product.id %}" class="btn btn-sm btn-success">Add Stock</a>
+                    <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteModal" data-product-id="{{ product.id }}" data-product-name="{{ product.name }}">Delete</button>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Pagination -->
+    <div class="pagination">
+        <span class="page-link">{% if page_obj.has_previous %}<a href="?page=1&search={{ search_query }}">First</a>{% endif %}</span>
+        <span class="page-link">{% if page_obj.has_previous %}<a href="?page={{ page_obj.previous_page_number }}&search={{ search_query }}">Previous</a>{% endif %}</span>
+        <span class="page-link">{% if page_obj.has_next %}<a href="?page={{ page_obj.next_page_number }}&search={{ search_query }}">Next</a>{% endif %}</span>
+        <span class="page-link">{% if page_obj.has_next %}<a href="?page={{ page_obj.paginator.num_pages }}&search={{ search_query }}">Last</a>{% endif %}</span>
     </div>
+</div>
+
+<!-- Delete Confirmation Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteModalLabel">Confirm Delete</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to delete <strong id="productName"></strong>?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <a href="#" id="confirmDeleteBtn" class="btn btn-danger">Delete</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+    // JavaScript for Delete Confirmation Modal
+    $('#deleteModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget);
+        var productId = button.data('product-id');
+        var productName = button.data('product-name');
+        
+        var modal = $(this);
+        modal.find('#productName').text(productName);
+        modal.find('#confirmDeleteBtn').attr('href', '{% url "delete_product" "0" %}'.slice(0, -1) + productId);
+    });
+</script>
+
 
 {% endblock %}

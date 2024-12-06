@@ -10,7 +10,7 @@
 
 
 {% block content %}
-    <div class="container mt-4">
+    <div class="container mt-4 justify-content-center col-sm-6">
         <h2>Product Details</h2>
         <table class="table">
             <tr>
@@ -46,6 +46,9 @@
                 <td>{{ product.sku }}</td>
             </tr>
         </table>
-        <a href="{% url 'edit_product' product.id %}" class="btn btn-warning">Edit Product</a>
+       <a href="{% url 'edit_product' product.id %}" class="btn btn-warning btn-sm">Edit</a>
+
+
+
     </div>
 {% endblock %}

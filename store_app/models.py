@@ -1,4 +1,6 @@
 from datetime import timezone
+
+from django.db.models import Sum
 from django.utils import timezone
 
 
@@ -63,11 +65,13 @@ class Product(models.Model):
             self.status = "In Stock"
         super().save(*args, **kwargs)
 
-
-
+    def total_sales(self):
+        return self.sales.aggregate(total=Sum('quantity'))['total'] or 0
 
     def __str__(self):
-        return f'{self.name} {self.sku}'
+        return f'{self.name} ({self.sku})'
+
+
 
     class Meta:
         verbose_name = 'Product'
