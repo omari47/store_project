@@ -32,7 +32,178 @@
 
     <!-- Template Main CSS File -->
     <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+    <style>
+        /* General Styles */
+        body {
+            background-color: #f5f5f5; /* Light gray for contrast */
+            font-family: 'Nunito', sans-serif;
+        }
 
+        /* Header */
+        header.header {
+            background-color: #00334e; /* Dark blue */
+            color: white;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        header.header a.logo img {
+            height: 40px;
+        }
+
+        header.header .logo span {
+            color: #ffcc00; /* Gold for contrast */
+        }
+
+        /* Sidebar */
+        .sidebar {
+            background-color: #001f33; /* Darker blue for sidebar */
+            color: #ffffff;
+        }
+
+        .sidebar .nav-link {
+            color: #cce7ff; /* Soft light blue for links */
+            font-size: 15px;
+        }
+
+        .sidebar .nav-link.active {
+            background-color: #004a73; /* Highlighted blue */
+            color: #ffffff;
+        }
+
+        .sidebar-divider {
+            border-color: #cce7ff; /* Matching link color */
+        }
+
+        /* Sidebar Toggle Button */
+        .toggle-sidebar-btn {
+            background-color: #ffcc00; /* Gold for high visibility */
+            color: #00334e; /* Dark blue for contrast */
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .toggle-sidebar-btn:hover {
+            background-color: #ffc107; /* Lighter gold for hover */
+        }
+
+        /* Footer */
+        footer.footer {
+            background-color: #001f33; /* Dark blue */
+            color: #cce7ff; /* Light blue text for better visibility */
+            text-align: center;
+            padding: 10px 0;
+            font-size: 14px;
+        }
+
+        footer.footer .copyright {
+            color: #cce7ff; /* Matches the text color for visibility */
+        }
+
+        footer.footer a {
+            color: #ffcc00; /* Gold for links */
+        }
+
+        footer.footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Main Content */
+        .main {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Buttons */
+        .btn-primary {
+            background-color: #004a73; /* Brighter blue */
+            border: none;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #00334e; /* Slightly darker */
+        }
+
+        .btn-danger {
+            background-color: #b32d00; /* Deep orange-red */
+            border: none;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background-color: #802000; /* Slightly darker */
+        }
+
+        .btn-warning {
+            background-color: #ffc107; /* Gold */
+            border: none;
+            color: black;
+        }
+
+        .btn-warning:hover {
+            background-color: #ff9900; /* Deeper gold */
+        }
+
+        /* Forms */
+        .form-control {
+            border: 1px solid #004a73; /* Blue border */
+            border-radius: 5px;
+        }
+
+        .form-control:focus {
+            border-color: #00334e;
+            box-shadow: 0 0 5px rgba(0, 51, 78, 0.5);
+        }
+
+        /* Login Box */
+        .login-box {
+            background-color: rgba(0, 51, 78, 0.8); /* Dark translucent blue */
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .login-box h2 {
+            color: #ffcc00; /* Gold */
+        }
+
+        .login-box a {
+            color: #cce7ff;
+        }
+
+        .login-box a:hover {
+            text-decoration: underline;
+        }
+
+        /* Table Styles */
+        .table thead {
+            background-color: #00334e; /* Dark blue */
+            color: white;
+        }
+
+        .table tbody tr:hover {
+            background-color: #e6f7ff; /* Soft light blue */
+        }
+
+        /* Back to Top Button */
+        .back-to-top {
+            background-color: #004a73;
+            color: white;
+        }
+
+        .back-to-top:hover {
+            background-color: #00334e;
+        }
+    </style>
 
 </head>
 
@@ -76,7 +247,15 @@
     </nav><!-- End Icons Navigation -->
 
 </header><!-- End Header -->
-
+<!-- Flash Messages -->
+<div class="container mt-3">
+    {% for message in messages %}
+        <div class="alert {{ message.tags }} alert-dismissible fade show" role="alert">
+            <p>{{ message }}</p>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endfor %}
+</div><!-- End Flash Messages -->
 
 <!-- ======= Sidebar ======= -->
 <div>
@@ -161,17 +340,17 @@
 
             </aside><!-- End Sidebar-->  <!-- Sidebar content here -->
         </aside>
-{#    add messages#}
-{#<div class="container">#}
-{#    {% for message in messages %}#}
-{##}
-{#        <div class="alert {{ message.tags }}  alert-warning alert-dismissible fade show" role="alert">#}
-{#            <p>{{ message }}</p>#}
-{#            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>#}
-{#        </div>#}
-{#    {% endfor %}#}
-{##}
-{#</div>#}
+        {#    add messages#}
+        {#<div class="container">#}
+        {#    {% for message in messages %}#}
+        {##}
+        {#        <div class="alert {{ message.tags }}  alert-warning alert-dismissible fade show" role="alert">#}
+        {#            <p>{{ message }}</p>#}
+        {#            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>#}
+        {#        </div>#}
+        {#    {% endfor %}#}
+        {##}
+        {#</div>#}
         <main id="main" class="main">
 
             {% block content %}

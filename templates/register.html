@@ -1,26 +1,26 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="utf-8">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>Register - Store MIS</title>
-
-     <!-- Favicons -->
-
-    <link rel="icon" type="image/x-icon" href="{% static 'assets/img/favicon.ico' %}">
-    
-    <!-- Google Fonts -->
-    <link href="https://fonts.gstatic.com" rel="preconnect">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
-          rel="stylesheet">
-
-    <!-- Vendor CSS Files -->
-    <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
-    <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
-    <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
-    {% block extra_css %}
+{#{% load static %}#}
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{##}
+{#<head>#}
+{#    <meta charset="utf-8">#}
+{#    <meta content="width=device-width, initial-scale=1.0" name="viewport">#}
+{#    <title>Register - Store MIS</title>#}
+{##}
+{#     <!-- Favicons -->#}
+{##}
+{#    <link rel="icon" type="image/x-icon" href="{% static 'assets/img/favicon.ico' %}">#}
+{##}
+{#    <!-- Google Fonts -->#}
+{#    <link href="https://fonts.gstatic.com" rel="preconnect">#}
+{#    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"#}
+{#          rel="stylesheet">#}
+{##}
+{#    <!-- Vendor CSS Files -->#}
+{#    <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">#}
+{#    <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">#}
+{#    <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">#}
+{#    {% block extra_css %}#}
 {#    	 <style>#}
 {#        .register {#}
 {#            background: url("{% static 'assets/img/storereg.jpg' %}") no-repeat center center fixed;#}
@@ -42,7 +42,253 @@
 {#            background-color: #0056b3;#}
 {#        }#}
 {#    </style>#}
-    {% endblock %}
+{#    {% endblock %}#}
+{#</head>#}
+{##}
+{#<body>#}
+{##}
+{#<!-- ======= Header ======= -->#}
+{#<header id="header" class="header fixed-top d-flex align-items-center">#}
+{#    <div class="d-flex align-items-center justify-content-between">#}
+{#        <a href="{% url 'dashboard' %}" class="logo d-flex align-items-center">#}
+{#            <img src="{% static 'images/store.png' %}" alt="">#}
+{#            <span class="d-none d-lg-block">StoreSync</span>#}
+{#        </a>#}
+{#    </div>#}
+{#</header><!-- End Header -->#}
+{##}
+{#<main>#}
+{#    <div class="container">#}
+{#        <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">#}
+{#            <div class="container">#}
+{#                <div class="row justify-content-center mt-3">#}
+{#                    <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">#}
+{##}
+{#                        <div class="d-flex justify-content-center py-4">#}
+{#                            <a href="{% url 'dashboard' %}" class="logo d-flex align-items-center w-auto">#}
+{#                                <img src="{% static 'images/store.png' %}" alt="">#}
+{#                                <span class="d-none d-lg-block">StoreSync</span>#}
+{#                            </a>#}
+{#                        </div><!-- End Logo -->#}
+{##}
+{#                        <div class="card mb-3">#}
+{#                            <div class="card-body">#}
+{##}
+{#                                <div class="pt-4 pb-2">#}
+{#                                    <h5 class="card-title text-center pb-0 fs-4">Create an Account</h5>#}
+{#                                    <p class="text-center small">Enter your details to register</p>#}
+{#                                </div>#}
+{##}
+{#                                <form method="POST" class="row g-3 needs-validation" novalidate>#}
+{#                                    {% csrf_token %}#}
+{#                                    <div class="col-12">#}
+{#                                        <label for="yourName" class="form-label">Full Name</label>#}
+{#                                        <input type="text" name="full_name" class="form-control" id="yourName" required>#}
+{#                                        <div class="invalid-feedback">Please enter your full name.</div>#}
+{#                                    </div>#}
+{##}
+{#                                    <div class="col-12">#}
+{#                                        <label for="yourEmail" class="form-label">Email</label>#}
+{#                                        <input type="email" name="email" class="form-control" id="yourEmail" required>#}
+{#                                        <div class="invalid-feedback">Please enter a valid email address.</div>#}
+{#                                    </div>#}
+{##}
+{#                                    <div class="col-12">#}
+{#                                        <label for="yourUsername" class="form-label">Username</label>#}
+{#                                        <input type="text" name="username" class="form-control" id="yourUsername" required>#}
+{#                                        <div class="invalid-feedback">Please choose a username.</div>#}
+{#                                    </div>#}
+{##}
+{#                                    <div class="col-12">#}
+{#                                        <label for="yourPassword" class="form-label">Password</label>#}
+{#                                        <input type="password" name="password" class="form-control" id="yourPassword" required>#}
+{#                                        <div class="invalid-feedback">Please enter a password.</div>#}
+{#                                    </div>#}
+{##}
+{#                                    <div class="col-12">#}
+{#                                        <label for="confirmPassword" class="form-label">Confirm Password</label>#}
+{#                                        <input type="password" name="confirm_password" class="form-control" id="confirmPassword" required>#}
+{#                                        <div class="invalid-feedback">Passwords do not match.</div>#}
+{#                                    </div>#}
+{##}
+{#                                    <div class="col-12">#}
+{#                                        <div class="form-check">#}
+{#                                            <input class="form-check-input" name="terms" type="checkbox" value="" id="acceptTerms" required>#}
+{#                                            <label class="form-check-label" for="acceptTerms">#}
+{#                                                I agree to the <a href="#">terms and conditions</a>#}
+{#                                            </label>#}
+{#                                            <div class="invalid-feedback">You must agree before submitting.</div>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{##}
+{#                                    <div class="col-12">#}
+{#                                        <button class="btn btn-primary w-100" type="submit">Register</button>#}
+{#                                    </div>#}
+{#                                    <div class="col-12">#}
+{#                                        <p class="small mb-0">Already have an account? <a href="{% url 'login' %}">Login</a></p>#}
+{#                                    </div>#}
+{#                                </form>#}
+{##}
+{#                            </div>#}
+{#                        </div>#}
+{##}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        </section>#}
+{#    </div>#}
+{#</main>#}
+{##}
+{#<!-- Vendor JS Files -->#}
+{#<script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>#}
+{#<script>#}
+{#    // Example JavaScript for front-end validation#}
+{#    (function () {#}
+{#        'use strict'#}
+{#        const forms = document.querySelectorAll('.needs-validation')#}
+{##}
+{#        Array.from(forms).forEach(function (form) {#}
+{#            form.addEventListener('submit', function (event) {#}
+{#                if (!form.checkValidity()) {#}
+{#                    event.preventDefault()#}
+{#                    event.stopPropagation()#}
+{#                }#}
+{#                form.classList.add('was-validated')#}
+{#            }, false)#}
+{#        })#}
+{#    })()#}
+{#</script>#}
+{#</body>#}
+{##}
+{#</html>#}
+{##}
+{##}
+{##}
+{##}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Register - StoreSync</title>
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="{% static 'assets/img/favicon.ico' %}">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.gstatic.com" rel="preconnect">
+    <link
+        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+        rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+
+    <!-- Custom Styling -->
+    <style>
+        /* Global Styles */
+        body {
+            background: url("{% static 'images/shop.jpg' %}") no-repeat center center fixed;
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+        }
+
+        main {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        /* Header */
+        #header {
+            background-color: rgba(0, 51, 78, 0.9); /* Dark blue */
+            color: #cce7ff; /* Light blue */
+            padding: 10px 0;
+        }
+
+        #header .logo span {
+            color: #ffcc00; /* Gold */
+            font-weight: bold;
+        }
+        {#.gold{#}
+        {#     color: #ffcc00; /* Gold */#}
+        {#    font-weight: bold;#}
+        
+
+        /* Form Section */
+        .register {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-grow: 1;
+            padding: 20px;
+        }
+
+        .card {
+            background-color: rgba(0, 51, 78, 0.9); /* Dark translucent blue */
+            color: #cce7ff; /* Light blue text */
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        h5.card-title {
+            color: #cce7ff; /* Light blue */
+        }
+
+        .form-label {
+            color: #cce7ff;
+        }
+
+        .form-control {
+            background-color: #f8f9fa; /* Light gray background */
+            border: 1px solid #004a73; /* Blue border */
+            color: #00334e; /* Dark blue text */
+            border-radius: 5px;
+        }
+
+        .form-control:focus {
+            border-color: #00334e;
+            box-shadow: 0 0 8px rgba(0, 51, 78, 0.5);
+        }
+
+        /* Buttons */
+        .btn-primary {
+            background-color: #004a73; /* Dark blue */
+            border-color: #004a73;
+            color: #ffffff;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #00334e; /* Slightly darker blue */
+            border-color: #00334e;
+        }
+
+        /* Footer */
+        footer {
+            background-color: rgba(0, 51, 78, 0.9);
+            color: #cce7ff;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        /* Link Styling */
+        a {
+            color: #ffcc00; /* Gold links */
+        }
+
+        a:hover {
+            color: #ffc107; /* Lighter gold on hover */
+            text-decoration: underline;
+        }
+    </style>
 </head>
 
 <body>
@@ -59,7 +305,7 @@
 
 <main>
     <div class="container">
-        <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
+        <section class="register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
             <div class="container">
                 <div class="row justify-content-center mt-3">
                     <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
@@ -67,13 +313,12 @@
                         <div class="d-flex justify-content-center py-4">
                             <a href="{% url 'dashboard' %}" class="logo d-flex align-items-center w-auto">
                                 <img src="{% static 'images/store.png' %}" alt="">
-                                <span class="d-none d-lg-block">StoreSync</span>
+                                <span class="d-none d-lg-block gold">StoreSync</span>
                             </a>
                         </div><!-- End Logo -->
 
                         <div class="card mb-3">
                             <div class="card-body">
-
                                 <div class="pt-4 pb-2">
                                     <h5 class="card-title text-center pb-0 fs-4">Create an Account</h5>
                                     <p class="text-center small">Enter your details to register</p>
@@ -139,29 +384,29 @@
     </div>
 </main>
 
+<!-- Footer -->
+<footer>
+    <p>&copy; 2024 StoreSync. All rights reserved.</p>
+</footer>
+
 <!-- Vendor JS Files -->
 <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
 <script>
-    // Example JavaScript for front-end validation
     (function () {
-        'use strict'
-        const forms = document.querySelectorAll('.needs-validation')
-
+        'use strict';
+        const forms = document.querySelectorAll('.needs-validation');
         Array.from(forms).forEach(function (form) {
             form.addEventListener('submit', function (event) {
                 if (!form.checkValidity()) {
-                    event.preventDefault()
-                    event.stopPropagation()
+                    event.preventDefault();
+                    event.stopPropagation();
                 }
-                form.classList.add('was-validated')
-            }, false)
-        })
-    })()
+                form.classList.add('was-validated');
+            }, false);
+        });
+    })();
 </script>
 </body>
 
 </html>
-
-
-
 
