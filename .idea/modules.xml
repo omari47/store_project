@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/store_three.iml" filepath="$PROJECT_DIR$/.idea/store_three.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/StoreSync.iml" filepath="$PROJECT_DIR$/.idea/StoreSync.iml" />
     </modules>
   </component>
 </project>
